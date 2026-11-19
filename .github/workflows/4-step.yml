@@ -1,0 +1,22 @@
+name: Passo 4
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [improve-upload]
+    paths:
+      - "src/components/upload/**"
+      - src/app/upload/page.tsx
+
+permissions:
+  contents: read
+  actions: write
+  issues: write
+
+jobs:
+  delivery:
+    name: Validar interação por teclado
+    uses: ./.github/workflows/check-step.yml
+    with:
+      step: 4
+      next-step: 5

@@ -1,0 +1,23 @@
+name: Passo 5
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [improve-upload]
+    paths:
+      - ".github/skills/test-tags/**"
+      - tests/tag-autocomplete.test.tsx
+      - "src/components/upload/**"
+      - src/app/upload/page.tsx
+
+permissions:
+  contents: read
+  actions: write
+  issues: write
+
+jobs:
+  delivery:
+    uses: ./.github/workflows/check-step.yml
+    with:
+      step: 5
+      next-step: 6

@@ -1,0 +1,19 @@
+name: Passo 1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [improve-upload]
+
+permissions:
+  contents: read
+  actions: write
+  issues: write
+
+jobs:
+  delivery:
+    name: Conferir ambiente e branch
+    uses: ./.github/workflows/check-step.yml
+    with:
+      step: 1
+      next-step: 2

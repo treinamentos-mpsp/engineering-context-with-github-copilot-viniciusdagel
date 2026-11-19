@@ -1,0 +1,25 @@
+name: Passo 6
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: write
+  actions: write
+  issues: write
+
+jobs:
+  delivery:
+    if: github.event.pull_request.head.ref == 'improve-upload' && github.event.pull_request.head.repo.full_name == github.repository
+    uses: ./.github/workflows/check-step.yml
+    with:
+      step: 6
+
+  finish_exercise:
+    needs: [delivery]
+    uses: skills/exercise-toolkit/.github/workflows/finish-exercise.yml@v0.9.3
+    with:
+      issue-url: ${{ needs.delivery.outputs.issue-url }}
+      exercise-title: "GitHub Copilot Advanced - entregas com contexto"
